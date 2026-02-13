@@ -1,0 +1,30 @@
+
+Exercise 0 - Planting Your First Seed (Program Structure)
+¿Qué significa if __name__ == "__main__": Es una condición que verifica si el script actual se está ejecutando directamente como programa principal o si está siendo importado desde otro archivo. Cuando ejecutas un archivo directamente (python archivo.py), Python establece la variable especial __name__ con el valor "__main__". Si el archivo es importado, __name__ toma el nombre del archivo.
+¿Por qué es importante este patrón en Python? Es crucial para controlar la ejecución del código. Asegura que ciertos bloques (como llamadas a funciones o pruebas) se ejecuten SOLO cuando el script se llama directamente, evitando que se ejecuten automáticamente y causen efectos secundarios no deseados cuando el archivo se importa como un módulo en otro script.
+¿Qué pasa si eliminas la línea if __name__ == "__main__":? Si se elimina, la llamada a la función (en este caso, ft_garden_intro("Rose", 25, 30)) quedará suelta en el código y se ejecutará siempre que el archivo sea leído por Python. Esto incluye cuando sea importado desde otro script, lo cual es una mala práctica.
+¿Cuándo NO se ejecutaría este código? Asumiendo que la condición está presente, el código dentro del bloque (ft_garden_intro("Rose", 25, 30)) NO se ejecutará cuando el archivo sea importado como un módulo desde otro script de Python.
+Verificación del "Entry point" (Punto de entrada): El uso de if __name__ == "__main__": es la convención estándar en Python para definir el punto de entrada principal del programa. Esto demuestra que el estudiante entiende cómo separar la fase de "definición" (donde se crean funciones y clases) de la fase de "ejecución" (donde el programa realmente comienza a hacer su trabajo).
+Aquí tienes las respuestas a las preguntas de evaluación para el resto de los ejercicios, basadas en el código de tu proyecto:
+Exercise 1 - Garden Data Organizer (Classes)
+¿Qué es una clase y por qué se usó? Una clase es un molde o plantilla para crear objetos. Se usó la clase Plant para agrupar los datos relacionados de una planta (nombre, altura y edad) en una sola estructura lógica y organizada, en lugar de tener variables sueltas.
+Dónde se definió e instanció: La clase se define al principio del archivo con class Plant:. Las instancias se crean dentro de la función ft_garden_data() usando la sintaxis plant1 = Plant("Rose", 25, 30).
+Exercise 2 - Plant Growth Simulator (Methods)
+¿Qué son los métodos y por qué se usaron? Los métodos son funciones que pertenecen a un objeto y operan sobre sus datos internos (estado). Se usaron para encapsular los comportamientos naturales de las plantas, como crecer y envejecer.
+Demostración de llamadas: En el código, los métodos se llaman usando la notación de punto dentro de un bucle de simulación de 6 días: plant.grow(1) y plant.age(1). Esto modifica de forma persistente los atributos internos self.height y self.current_age.
+Exercise 3 - Plant Factory (Initialization)
+¿Qué hace __init__ y por qué es necesario? Es el método constructor. Se ejecuta automáticamente al crear un nuevo objeto y es necesario para inicializar el objeto dándole valores iniciales a sus atributos (nombre, altura, edad) en el momento exacto de su creación.
+Asignación de valores iniciales: Los valores se extraen de una lista de tuplas (plant_data) y se utiliza una lista de comprensión con desempaquetado de argumentos [Plant(*data) for data in plant_data] para enviar esos valores iniciales al __init__ de forma masiva y eficiente.
+Exercise 4 - Garden Security System (Encapsulation)
+¿Qué es el encapsulamiento y por qué es importante? Es la práctica de ocultar los datos internos de un objeto y restringir el acceso directo a ellos desde el exterior. Es vital para proteger la integridad de los datos y evitar que el objeto entre en un estado inválido.
+Protección de datos: Se protegieron los atributos usando un guion bajo para marcarlos como internos (ej. self._height, self._age). Luego se crearon métodos controlados como set_height(self, height: int) que contienen condicionales lógicos (if height < 0:) para rechazar modificaciones inválidas.
+Exercise 5 - Specialized Plant Types (Inheritance)
+¿Qué es la herencia y por qué se usó? Es un mecanismo que permite a nuevas clases (hijas) adquirir los atributos y métodos de una clase existente (padre). Se usó para evitar repetir el código de propiedades comunes (nombre, altura, edad) y enfocarse en programar solo lo que hace especial a cada tipo de planta.
+Relaciones Padre-Hijo: La clase Plant es el padre. Las clases Flower, Tree y Vegetable son las hijas, lo cual se indica en la declaración de clase, por ejemplo: class Flower(Plant):. Las hijas utilizan super().__init__ para llamar al constructor del padre y luego definen métodos únicos como bloom() o produce_shade().
+Exercise 6 - Garden Analytics Platform (Advanced OOP)
+Funciones miembro vs no-miembro: Las funciones miembro pertenecen a una clase (como add_plant u operan bajo decoradores como @staticmethod) y actúan sobre el estado del objeto/clase. Las funciones no miembro, como ft_garden_analytics(), son independientes, sirven como punto de entrada y se encargan de instanciar las clases.
+Conceptos Avanzados implementados:
+Nested Classes (Clases anidadas): GardenStats se define dentro de GardenManager porque su existencia solo tiene sentido como herramienta auxiliar para analizar el jardín padre.
+Class methods (@classmethod): create_garden_network recibe la clase misma (cls) en lugar de la instancia (self) para actuar como un "factory" que crea y devuelve múltiples instancias (Alice y Bob) preconfiguradas.
+Static methods (@staticmethod): validate_height y calculate_score no necesitan acceder a self ni cls. Son herramientas de utilidad pura agrupadas dentro de la clase por organización y cohesión.
+Cadena de herencia: Muestra herencia multinivel (Plant -> FloweringPlant -> PrizeFlower), donde cada nivel usa super().__init__ para ir delegando hacia arriba la inicialización de atributos hasta la clase base.
